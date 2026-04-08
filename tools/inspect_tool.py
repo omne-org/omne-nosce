@@ -99,7 +99,7 @@ def check_structural(target: Path) -> list[str]:
 
     # Max depth 2: files must live at root or one level deep (e.g. agents/foo.md)
     # Skip non-image dirs: hidden dirs, Python cache, and meta-dirs (defaults, tools, tests).
-    _SKIP_DIRS = {".git", "__pycache__", "defaults", "tools", "tests"}
+    _SKIP_DIRS = {".git", "__pycache__", "defaults", "tools", "tests", "core"}
     for path in target.rglob("*"):
         rel = path.relative_to(target)
         if any(part.startswith(".") or part in _SKIP_DIRS for part in rel.parts):

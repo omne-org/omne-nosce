@@ -125,6 +125,27 @@ class TestCheckStructural(unittest.TestCase):
             issues = check_structural(root)
             self.assertTrue(any("depth" in i.lower() or "nested" in i.lower() for i in issues), issues)
 
+    def test_core_submodule_skipped(self):
+        """core/ kernel submodule (deep nesting) does not trigger depth violation."""
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            _make_valid_distro(root)
+            # Simulate kernel submodule structure at core/cli/lib/
+            deep = root / "core" / "cli" / "lib" / "distro.py"
+            deep.parent.mkdir(parents=True)
+            deep.write_text("# kernel module\n", encoding="utf-8")
+            issues = check_structural(root)
+            self.assertEqual(issues, [], f"core/ should be skipped, got: {issues}")
+
+    def test_valid_without_core(self):
+        """Distro without core/ submodule still passes structural check."""
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            _make_valid_distro(root)
+            # No core/ dir — backward compat
+            issues = check_structural(root)
+            self.assertEqual(issues, [], f"Expected no issues, got: {issues}")
+
 
 # ---------------------------------------------------------------------------
 # System checks (5 tests)
