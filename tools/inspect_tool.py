@@ -98,11 +98,11 @@ def check_structural(target: Path) -> list[str]:
             issues.append(f"Missing required file: {fname}")
 
     # Max depth 2: files must live at root or one level deep (e.g. agents/foo.md)
-    # Hidden directories (starting with ".") are excluded from this check.
+    # Skip non-image dirs: hidden dirs, Python cache, and meta-dirs (defaults, tools, tests).
+    _SKIP_DIRS = {".git", "__pycache__", "defaults", "tools", "tests"}
     for path in target.rglob("*"):
         rel = path.relative_to(target)
-        # Skip hidden dirs (e.g. .git) and Python cache dirs
-        if any(part.startswith(".") or part == "__pycache__" for part in rel.parts):
+        if any(part.startswith(".") or part in _SKIP_DIRS for part in rel.parts):
             continue
         depth = len(rel.parts)
         if depth > 2:
