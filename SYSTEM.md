@@ -31,6 +31,8 @@ log-dirs: [sessions, evolution]
 
 ## Boot Chain
 
-1. Volume `CLAUDE.md` loads `.omne/MANIFEST.md`
-2. MANIFEST loads this file (`.omne/image/SYSTEM.md`)
-3. This file establishes stages, agents, and loads `context-map.md`
+1. Volume `CLAUDE.md` imports `@.omne/MANIFEST.md`
+2. MANIFEST imports this file via `@image/SYSTEM.md`
+3. This file imports `@context-map.md` below
+
+@context-map.md
