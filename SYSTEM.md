@@ -1,6 +1,6 @@
 ---
 distro: omne-nosce
-distro-version: 0.1.0
+distro-version: 0.2.0
 domain: org-governance
 log-dirs: [sessions, evolution]
 ---

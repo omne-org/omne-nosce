@@ -1,5 +1,6 @@
 ---
 name: assess-domain
+description: Explore a target domain (workflows, roles, artifacts) to inform a distro proposal. Use during the assess stage.
 agent: sonder
 stage: assess
 ---

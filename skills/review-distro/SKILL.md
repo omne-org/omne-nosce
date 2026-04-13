@@ -1,5 +1,6 @@
 ---
 name: review-distro
+description: Adversarially review distro designs and generated artifacts for gaps, contradictions, and logical flaws. Use during design and validate stages.
 agent: negator
 stage: design
 ---

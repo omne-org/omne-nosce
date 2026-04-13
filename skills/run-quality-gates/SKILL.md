@@ -1,5 +1,6 @@
 ---
 name: run-quality-gates
+description: Execute automated quality gate checks against a nightly distro build. Use during the validate stage.
 agent: inspector
 stage: validate
 ---

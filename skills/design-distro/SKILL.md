@@ -1,5 +1,6 @@
 ---
 name: design-distro
+description: Co-design a complete distro specification with the user, incorporating Negator feedback. Use during the design stage.
 agent: sonder
 stage: design
 ---

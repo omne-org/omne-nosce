@@ -30,8 +30,9 @@ def _make_valid_distro(root: Path) -> None:
     (root / "agents" / "worker.md").write_text(
         "---\nname: worker\nrole: subagent\nstages: [build]\n---\n# Worker\n"
     , encoding="utf-8")
-    (root / "skills" / "do-work.md").write_text(
-        "---\nname: do-work\nagent: worker\nstage: build\n---\n# Do Work\n"
+    (root / "skills" / "do-work").mkdir()
+    (root / "skills" / "do-work" / "SKILL.md").write_text(
+        "---\nname: do-work\ndescription: Do the work for the worker agent\nagent: worker\nstage: build\n---\n# Do Work\n"
     , encoding="utf-8")
     (root / "hooks" / "pre-build.md").write_text(
         "---\nname: pre-build\nfrom-stage: plan\nto-stage: build\n---\n# Pre-Build\n"

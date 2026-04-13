@@ -14,7 +14,7 @@ Scaffolder. Creates and modifies distro files in the nightly worktree based on a
 
 - Read the approved design from `log/evolution/<distro>/proposals/`
 - Create `agents/*.md` files with proper YAML frontmatter
-- Create `skills/*.md` files mapped to agents
+- Create `skills/<name>/SKILL.md` files mapped to agents (Claude Code skill layout)
 - Create `hooks/*.md` files for stage transitions
 - Create `context-map.md` with agent access matrix
 - Create `SYSTEM.md` with distro metadata, stages, and agent roster

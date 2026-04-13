@@ -1,5 +1,6 @@
 ---
 name: manage-worktree
+description: Create and remove nightly worktrees for distro evolution cycles. Use at the boundaries of the generate stage.
 agent: architect
 stage: generate
 ---

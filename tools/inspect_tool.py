@@ -81,7 +81,11 @@ def _extract_stages_from_system(system_path: Path) -> list[str]:
 # ---------------------------------------------------------------------------
 
 def check_structural(target: Path) -> list[str]:
-    """Check required dirs/files exist, dirs are non-empty, max depth 2."""
+    """Check required dirs/files exist, dirs are non-empty, max depth 2.
+
+    Exception: `skills/<name>/SKILL.md` is depth 3 but matches the
+    Claude Code skill layout, so it is allowed.
+    """
     issues: list[str] = []
 
     # Required directories
@@ -106,6 +110,9 @@ def check_structural(target: Path) -> list[str]:
             continue
         depth = len(rel.parts)
         if depth > 2:
+            # Allow Claude Code skill layout: skills/<name>/SKILL.md
+            if depth == 3 and rel.parts[0] == "skills" and rel.parts[2] == "SKILL.md":
+                continue
             issues.append(
                 f"Depth violation (max 2 levels): {rel}"
             )
@@ -283,10 +290,11 @@ def check_skills(target: Path) -> list[str]:
     if not agent_names:
         return issues
 
-    # Collect all agent values from skill frontmatter
+    # Collect all agent values from skill frontmatter.
+    # Claude Code skill layout: `skills/<name>/SKILL.md`.
     agents_with_skills: set[str] = set()
     if skills_dir.is_dir():
-        for skill_file in skills_dir.glob("*.md"):
+        for skill_file in skills_dir.glob("*/SKILL.md"):
             fm = _parse_frontmatter(skill_file)
             agent_val = fm.get("agent", "")
             if agent_val:

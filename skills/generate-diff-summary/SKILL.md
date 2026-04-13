@@ -1,5 +1,6 @@
 ---
 name: generate-diff-summary
+description: Produce a human-readable summary of nightly worktree changes for user review. Use during the propose stage.
 agent: clerk
 stage: propose
 ---
